@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Cypress Playground</title>
+  <script>
+    function loadDelayedElement() {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.id = 'delayed';
+        el.textContent = 'Я появился с задержкой';
+        document.body.appendChild(el);
+      }, 2000);
+    }
+
+    function saveToken() {
+      localStorage.setItem('auth_token', '123abc');
+      document.getElementById('secure-content').style.display = 'block';
+    }
+
+    function simulateError() {
+      throw new Error('Симулированная ошибка!');
+    }
+  </script>
+</head>
+<body onload="loadDelayedElement()">
+  <h1>Добро пожаловать в продвинутую песочницу</h1>
+
+  <h2>Форма с валидацией</h2>
+  <form id="test-form">
+    <input id="email" type="email" placeholder="Введите email" required><br>
+    <input id="name" type="text" placeholder="Имя" required><br>
+    <button type="submit">Отправить</button>
+  </form>
+  <div id="form-message" style="color:red; display:none;">Заполните все поля корректно!</div>
+
+  <h2>Секретная зона</h2>
+  <button onclick="saveToken()">Войти с токеном</button>
+  <div id="secure-content" style="display:none;">Вы авторизованы!</div>
+
+  <h2>Ошибка JavaScript</h2>
+  <button onclick="simulateError()">Вызвать ошибку</button>
+
+  <h2>Таблица цен</h2>
+  <table border="1" id="price-table">
+    <tr><th>Товар</th><th>Цена</th><th></th></tr>
+    <tr><td>Книга</td><td>12</td><td><button>Подробнее</button></td></tr>
+    <tr><td>Ноутбук</td><td>950</td><td><button>Подробнее</button></td></tr>
+    <tr><td>Ручка</td><td>2</td><td><button>Подробнее</button></td></tr>
+  </table>
+
+  <h2>Встроенный iframe</h2>
+  <iframe id="demo-frame" srcdoc="<p id='frame-text'>Контент во фрейме</p>" width="300" height="100"></iframe>
+
+  <h2>Autocomplete</h2>
+  <input id="autocomplete" list="suggestions" placeholder="Введите город">
+  <datalist id="suggestions">
+    <option value="Берлин">
+    <option value="Гамбург">
+    <option value="Мюнхен">
+    <option value="Франкфурт">
+  </datalist>
+
+  <h2>API Тест</h2>
+  <button id="load-api">Загрузить пост</button>
+  <div id="api-output"></div>
+  <script>
+    document.getElementById('load-api').onclick = async () => {
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+      const json = await res.json();
+      document.getElementById('api-output').innerText = json.title;
+    };
+  </script>
+
+  <h2>Загрузка файла</h2>
+  <input type="file" id="file-upload">
+  <div id="file-name"></div>
+  <script>
+    document.getElementById('file-upload').addEventListener('change', function () {
+      document.getElementById('file-name').innerText = this.files[0].name;
+    });
+  </script>
+
+  <h2>Drag and Drop</h2>
+  <style>
+    #drag-source, #drop-target {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      display: inline-block;
+      background: #ccc;
+      text-align: center;
+      line-height: 100px;
+    }
+    #drop-target {
+      background: #eef;
+    }
+  </style>
+  <div id="drag-source" draggable="true">Item</div>
+  <div id="drop-target" ondragover="event.preventDefault()" ondrop="event.target.innerText = 'Dropped'">Drop here</div>
+</body>
+</html>
