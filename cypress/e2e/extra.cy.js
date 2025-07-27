@@ -1,21 +1,21 @@
 
 import 'cypress-file-upload'
 
-describe('Дополнительные компоненты', () => {
+describe('Additional components', () => {
   beforeEach(() => {
     cy.visit('/')
   })
 
-  it('iframe доступ', () => {
+  it('iframe access', () => {
     cy.get('#demo-frame').then($iframe => {
       const doc = $iframe[0].contentDocument
-      expect(doc.getElementById('frame-text').textContent).to.include('Контент во фрейме')
+      expect(doc.getElementById('frame-text').textContent).to.include('frame content')
     })
   })
 
   it('Autocomplete', () => {
-    cy.get('#autocomplete').type('Мю')
-    cy.get('#autocomplete').should('have.value', 'Мю')
+    cy.get('#autocomplete').type('mu')
+    cy.get('#autocomplete').should('have.value', 'mu')
   })
 
   it('API load и intercept', () => {

@@ -3,11 +3,11 @@ describe('Advanced Cypress Playground', () => {
     cy.visit('/')
   })
 
-  it('Ожидает появления элемента с задержкой', () => {
+  it('Waits till element appears with delay', () => {
     cy.get('#delayed').should('be.visible')
   })
 
-  it('Проверяет таблицу цен', () => {
+  it('Checks prices table', () => {
     cy.get('#price-table tr').should('have.length', 4)
     cy.get('#price-table tr').each(($el, index) => {
       if (index === 0) return
@@ -17,21 +17,21 @@ describe('Advanced Cypress Playground', () => {
     })
   })
 
-  it('Работает с localStorage', () => {
+  it('Works with localStorage', () => {
     cy.window().then(win => win.localStorage.setItem('auth_token', '123abc'))
     cy.reload()
     cy.get('#secure-content').should('be.visible')
   })
 
-  it('Обрабатывает JS-ошибку', () => {
+  it('Process JS-error', () => {
     cy.on('uncaught:exception', (err) => {
-      expect(err.message).to.include('Симулированная ошибка')
+      expect(err.message).to.include('Simulated error')
       return false
     })
-    cy.contains('Вызвать ошибку').click()
+    cy.contains('Call an error').click()
   })
 
-  it('Проверяет валидацию формы', () => {
+  it('Checks form validation', () => {
     cy.get('button[type=submit]').click()
     cy.get('#form-message').should('be.visible')
     cy.get('#email').type('user@example.com')

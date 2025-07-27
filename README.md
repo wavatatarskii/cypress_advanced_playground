@@ -1,39 +1,39 @@
 # Cypress Advanced Playground
 
-🧪 Продвинутый проект для практики автотестов с использованием [Cypress](https://www.cypress.io/)
+🧪 Advanced [Cypress](https://www.cypress.io/) dummy project
 
-## 📦 Установка
+## 📦 Installation
 
 ```bash
 npm install
 ```
 
-## 🚀 Запуск
+## 🚀 Start
 
 ```bash
-npm run start        # Запускает локальный сервер (порт 3000)
-npx cypress open     # Открывает Cypress UI
+npm run start        # Starts local service (port 3000)
+npx cypress open     # Opens Cypress UI
 ```
 
-## 🧪 Что тестируется
+## 🧪 Tests
 
-- ✅ Формы с валидацией
-- ✅ Работа с localStorage и токенами
-- ✅ Асинхронные элементы (delayed content)
+- ✅ Validations forms
+- ✅ Work with localStorage and tokens
+- ✅ Async elements(delayed content)
 - ✅ Drag & Drop
 - ✅ File Upload
-- ✅ Таблицы и данные
-- ✅ iframe доступ
+- ✅ Tables & data
+- ✅ iframe access
 - ✅ Autocomplete
-- ✅ API-запросы (с intercept)
+- ✅ API-reqs (with intercept)
 
 ## 🤖 CI
 
-Проект содержит GitHub Actions workflow `.github/workflows/cypress.yml`, который запускает тесты при каждом `push`/`PR`.
+Project contains GitHub Actions workflow `.github/workflows/cypress.yml`, which starts tests with each `push`/`PR`.
 
-## 📊 Тестовые отчёты
+## 📊 Test reports
 
-Можно подключить один из следующих репортеров:
+One of those reporters can be added:
 
 ### Mochawesome
 
@@ -41,7 +41,7 @@ npx cypress open     # Открывает Cypress UI
 npm install --save-dev mochawesome
 ```
 
-В `cypress.config.js`:
+In `cypress.config.js`:
 
 ```js
 const { defineConfig } = require('cypress');
@@ -57,13 +57,13 @@ module.exports = defineConfig({
 })
 ```
 
-### Allure (через Cypress Allure Plugin)
+### Allure (through Cypress Allure Plugin)
 
 ```bash
 npm install --save-dev @shelex/cypress-allure-plugin
 ```
 
-Добавь в `cypress.config.js`:
+Add in `cypress.config.js`:
 
 ```js
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
@@ -78,18 +78,14 @@ module.exports = {
 }
 ```
 
-В `support/e2e.js`:
+In `support/e2e.js`:
 
 ```js
 import '@shelex/cypress-allure-plugin';
 ```
 
-Запуск с Allure:
+Start with Allure:
 
 ```bash
 npx cypress run --env allure=true
 ```
-
-## 🧠 Автор
-
-Создан для обучения и отработки реальных сценариев автоматизации.
